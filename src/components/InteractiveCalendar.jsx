@@ -30,9 +30,20 @@ export default function InteractiveCalendar() {
     const currentMonthIndex = currentDate.getMonth();
 
     useEffect(() => {
-        const saved = localStorage.getItem("calendar_custom_images");
-        if (saved) setCustomImages(JSON.parse(saved));
-    }, []);
+        // Preload helper
+        const preloadImage = (url) => {
+            const img = new Image();
+            img.src = url;
+        };
+
+        // Calculate indices for next and previous months
+        const nextIdx = (currentMonthIndex + 1) % 12;
+        const prevIdx = (currentMonthIndex - 1 + 12) % 12;
+
+        // Preload both default and custom images for neighbors
+        preloadImage(customImages[nextIdx] || DEFAULT_IMAGES[nextIdx]);
+        preloadImage(customImages[prevIdx] || DEFAULT_IMAGES[prevIdx]);
+    }, [currentMonthIndex, customImages]);
 
     const handleMonthChange = (newDate) => {
         setAnimClass("animate-sync-flip-out");
