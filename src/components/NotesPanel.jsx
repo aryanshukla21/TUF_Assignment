@@ -1,24 +1,24 @@
+// src/components/NotesPanel.jsx
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
 
 export default function NotesPanel({ currentDate, animClass }) {
-    const [allNotes, setAllNotes] = useState({});
     const key = format(currentDate, "yyyy-MM");
 
-    useEffect(() => {
+    // Fix: Initialize state directly from localStorage to avoid extra renders
+    const [allNotes, setAllNotes] = useState(() => {
         const saved = localStorage.getItem("calendar_notes");
-        if (saved) {
-            try {
-                const parsed = JSON.parse(saved);
-                if (typeof parsed === 'object' && parsed !== null) {
-                    setAllNotes(parsed);
-                }
-            } catch (e) {
-                setAllNotes({ [key]: saved });
-            }
+        if (!saved) return {};
+        try {
+            const parsed = JSON.parse(saved);
+            return (typeof parsed === 'object' && parsed !== null) ? parsed : { [key]: saved };
+        } catch {
+            // Fix: Removed unused 'e'
+            return { [key]: saved };
         }
-    }, []);
+    });
 
+    // Sync state to localStorage whenever allNotes changes
     useEffect(() => {
         if (Object.keys(allNotes).length > 0) {
             localStorage.setItem("calendar_notes", JSON.stringify(allNotes));
@@ -27,7 +27,6 @@ export default function NotesPanel({ currentDate, animClass }) {
 
     return (
         <section className="bg-yellow-50 p-6 md:p-8 flex-grow border-t border-gray-200 shadow-inner overflow-hidden">
-            {/* This wrapper ensures the content flips while the container background remains */}
             <div className={`h-full flex flex-col ${animClass}`}>
                 <h3 className="text-xs font-bold text-gray-500 uppercase mb-4 tracking-widest">
                     {format(currentDate, "MMMM")} Memos

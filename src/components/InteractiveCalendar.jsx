@@ -1,22 +1,21 @@
 import { useState, useEffect, useRef } from "react";
 import { Camera } from "lucide-react";
-import { format } from "date-fns";
 import NotesPanel from "./NotesPanel";
 import CalendarGrid from "./CalendarGrid";
 
 const DEFAULT_IMAGES = [
-    "https://images.unsplash.com/photo-1478265409131-1f65c88f965c?q=80&w=1000",
-    "https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?q=80&w=1000",
-    "https://images.unsplash.com/photo-1490750967868-88cb4ecb07cb?q=80&w=1000",
-    "https://images.unsplash.com/photo-1521633603463-71ab47926c48?q=80&w=1000",
-    "https://images.unsplash.com/photo-1462275646964-a0e3386b89fa?q=80&w=1000",
-    "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1000",
-    "https://images.unsplash.com/photo-1533371452382-d45a9da51ad9?q=80&w=1000",
-    "https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?q=80&w=1000",
-    "https://images.unsplash.com/photo-1508964942454-1a56651d54ac?q=80&w=1000",
-    "https://images.unsplash.com/photo-1476820865390-c52aeebb9891?q=80&w=1000",
-    "https://images.unsplash.com/photo-1509803874385-db7c23652552?q=80&w=1000",
-    "https://images.unsplash.com/photo-1513269813580-0a568853b0a2?q=80&w=1000"
+    import.meta.env.VITE_IMG_JAN,
+    import.meta.env.VITE_IMG_FEB,
+    import.meta.env.VITE_IMG_MAR,
+    import.meta.env.VITE_IMG_APR,
+    import.meta.env.VITE_IMG_MAY,
+    import.meta.env.VITE_IMG_JUN,
+    import.meta.env.VITE_IMG_JUL,
+    import.meta.env.VITE_IMG_AUG,
+    import.meta.env.VITE_IMG_SEP,
+    import.meta.env.VITE_IMG_OCT,
+    import.meta.env.VITE_IMG_NOV,
+    import.meta.env.VITE_IMG_DEC
 ];
 
 export default function InteractiveCalendar() {
