@@ -1,19 +1,11 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import InteractiveCalendar from "./components/InteractiveCalendar";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <h1 className='text-5xl text-green-700'>
-        Hello
-      </h1>
-    </>
-  )
+    <main className="min-h-screen bg-gray-100 p-4 md:p-12 flex items-center justify-center font-sans">
+      <InteractiveCalendar />
+    </main>
+  );
 }
 
-export default App
+export default App;
